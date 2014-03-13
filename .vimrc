@@ -12,9 +12,12 @@ else
 	call vundle#rc()
 endif
 
+
 " let Vundle manage plugins
 " required! 
 Bundle 'gmarik/vundle'
+Bundle 'AutoComplPop'
+
 
 " vim-scripts.org repos
 Bundle 'OmniCppComplete'
@@ -25,11 +28,16 @@ Bundle 'ctrlp.vim'
 Bundle 'minibufexpl.vim'
 Bundle 'bufexplorer.zip'
 Bundle 'tomasr/molokai'
-Bundle 'Lokaltog/powerline'
 Bundle 'terryma/vim-multiple-cursors'
 Bundle 'grep.vim'
+Bundle 'ack.vim'
+Bundle 'javabrowser'
+Bundle 'Vim-JDE'
+Bundle 'auto-pairs'
+Bundle 'SuperTab-continued.'
 
 filetype plugin indent on     " required! 
+let NERDTreeDirArrows=0
 " vundle end
 
 " personal setting
@@ -59,14 +67,23 @@ noremap <silent> <Space> :noh<Bar>:echo<CR>
 let mapleader=","
 
 " For quick window navigation
-map <leader>h :wincmd h<CR>
-map <leader>j :wincmd j<CR>
-map <leader>k :wincmd k<CR>
-map <leader>l :wincmd l<CR> 
+"map <leader>h :wincmd h<CR>
+"map <leader>j :wincmd j<CR>
+"map <leader>k :wincmd k<CR>
+"map <leader>l :wincmd l<CR> 
 " nnoremap <C-h> <C-W>h
 " nnoremap <C-j> <C-W>j
 " nnoremap <C-k> <C-W>k
 " nnoremap <C-l> <C-W>l
+"noremap <silent> <F4> :bp<CR>
+"noremap <silent> <F5> :bn<CR>
+if has("gui_running") || (&term == "win32") || (&term == "pcterm") 
+	noremap <C-Left> :bn<CR>
+	noremap <C-Right> :bp<CR>
+else
+	noremap <Esc>[D :bp<CR>
+	noremap <Esc>[C :bn<CR>
+endif
 
 " Quick close all window
 map <leader>qq :qall<CR>
@@ -93,6 +110,7 @@ autocmd vimenter * NERDTree
 map <leader>t :NERDTreeToggle<CR>
 "let NERDTreeShowHidden=1
 let NERDTreeShowBookmarks=1
+let NERDTreeShowHidden=1
 " Used by winmanager
 " let g:NERDTree_title="[NERDTree]"
 " function! NERDTree_Start()
@@ -126,8 +144,6 @@ let g:miniBufExplMapWindowNavVim = 1
 let g:miniBufExplMapCTabSwitchBufs = 1
 " hot key for toggle minibufexplorer
 noremap <leader>m :TMiniBufExplorer<CR>
-noremap <C-Left>  :MBEbn<CR>
-noremap <C-Right> :MBEbp<CR>
 " Used by winmanager
 " let g:MiniBufExplorer_title="[MiniBufExplorer]"
 " function! MiniBufExplorer_Start()
@@ -140,7 +156,7 @@ noremap <C-Right> :MBEbp<CR>
 
 " For ctags
 set tags+=~/.vim/tagfiles/stl_tags
-map <F12> :!ctags -R --sort=yes --c++-kinds=+p --fields=+ialS --extra=+q .<CR> <CR>
+map <F12> :!ctags -R --exclude=="*/.svn" --sort=yes --c++-kinds=+p --fields=+ialS --extra=+q .<CR> <CR>
 
 " For CtrlP Plugin
 "let g:ctrlp_working_path_mode=1
@@ -163,6 +179,11 @@ if &diff
 	colors peaksea
 endif
 
+noremap <silent> <F7> :JavaBrowser<CR>
+let JavaBrowser_Ctags_Cmd='/usr/bin/ctags'
+let JavaBrowser_User_Highlight_Tag=1
+
+"Vim JDE
 " For windows mangaer
 " let g:winManagerWindowLayout = 'NERDTree|BufExplorer'
 " nmap <silent> <F8> :if IsWinManagerVisible() <BAR> WMToggle<CR> <BAR> else <BAR> WMToggle<CR>:q<CR> endif <CR><CR>
