@@ -182,7 +182,9 @@ endif
 noremap <silent> <F7> :JavaBrowser<CR>
 let JavaBrowser_Ctags_Cmd='/usr/bin/ctags'
 let JavaBrowser_User_Highlight_Tag=1
-
+  
+map <C-c> "+y
+map <S-C-v> "+p
 "Vim JDE
 " For windows mangaer
 " let g:winManagerWindowLayout = 'NERDTree|BufExplorer'
