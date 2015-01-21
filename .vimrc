@@ -223,6 +223,10 @@ let g:Tex_CompileRule_pdf='xelatex --interaction=nonstopmode $*'
 
 
 
+=======
+  
+map <S-C-c> "+y
+map <S-C-v> "+p
 "Vim JDE
 " For windows mangaer
 " let g:winManagerWindowLayout = 'NERDTree|BufExplorer'
