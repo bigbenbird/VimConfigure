@@ -41,7 +41,7 @@ Bundle 'SuperTab-continued.'
 "Bundle 'auctex.vim'
 Bundle "LaTeX-Suite-aka-Vim-LaTeX"
 
-filetype plugin indent on     " required! 
+"filetype plugin indent on     " required! 
 let NERDTreeDirArrows=0
 " vundle end
 
@@ -68,6 +68,9 @@ endif
 " For search highlight
 set hlsearch
 noremap <silent> <Space> :noh<Bar>:echo<CR>
+imap <C-space> <Plug>IMAP_JumpForward
+nmap <C-space> <Plug>IMAP_JumpForward
+vmap <C-space> <Plug>IMAP_JumpForward
 
 let mapleader=","
 
@@ -76,10 +79,10 @@ let mapleader=","
 "map <leader>j :wincmd j<CR>
 "map <leader>k :wincmd k<CR>
 "map <leader>l :wincmd l<CR> 
-" nnoremap <C-h> <C-W>h
-" nnoremap <C-j> <C-W>j
-" nnoremap <C-k> <C-W>k
-" nnoremap <C-l> <C-W>l
+"nnoremap <C-h> <C-W>h
+"nnoremap <C-j> <C-W>j
+"nnoremap <C-k> <C-W>k
+"nnoremap <C-l> <C-W>l
 "noremap <silent> <F4> :bp<CR>
 "noremap <silent> <F5> :bn<CR>
 if has("gui_running") || (&term == "win32") || (&term == "pcterm") 
@@ -222,11 +225,8 @@ let g:Tex_DefaultTargetFormat = 'pdf'
 let g:Tex_CompileRule_pdf='xelatex --interaction=nonstopmode $*'
 
 
+let g:miniBufExplMapWindowNavVim = 1
 
-=======
-  
-map <S-C-c> "+y
-map <S-C-v> "+p
 "Vim JDE
 " For windows mangaer
 " let g:winManagerWindowLayout = 'NERDTree|BufExplorer'
