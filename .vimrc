@@ -71,6 +71,9 @@ noremap <silent> <Space> :noh<Bar>:echo<CR>
 imap <C-space> <Plug>IMAP_JumpForward
 nmap <C-space> <Plug>IMAP_JumpForward
 vmap <C-space> <Plug>IMAP_JumpForward
+noremap ç "+y
+noremap √ "+p
+
 
 let mapleader=","
 
