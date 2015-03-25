@@ -17,6 +17,7 @@ endif
 " required! 
 Bundle 'gmarik/vundle'
 Bundle 'AutoComplPop'
+Plugin 'elzr/vim-json'
 
 
 " vim-scripts.org repos
