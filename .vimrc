@@ -11,8 +11,6 @@ else
 	set rtp+=~/.vim/bundle/vundle/
 	call vundle#rc()
 endif
-
-
 " let Vundle manage plugins
 " required! 
 Bundle 'gmarik/vundle'
@@ -88,11 +86,15 @@ let mapleader=","
 if has("gui_running") || (&term == "win32") || (&term == "pcterm") 
 	noremap <C-Left> :bn<CR>
 	noremap <C-Right> :bp<CR>
+"press Ctrl+v and then presss any key of keyborad under the insert mode, vim
+"sill diaplay the signal it recesived
+elseif (&term == "xterm")
+	noremap <Esc>[1;5D :bp<CR> 
+	noremap <Esc>[1;5C :bn<CR> 
 else
 	noremap <Esc>[D :bp<CR>
 	noremap <Esc>[C :bn<CR>
 endif
-
 " Quick close all window
 map <leader>qq :qall<CR>
 
