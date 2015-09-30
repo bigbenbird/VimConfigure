@@ -15,6 +15,7 @@ endif
 " required! 
 Bundle 'gmarik/vundle'
 Bundle 'AutoComplPop'
+Plugin 'elzr/vim-json'
 
 
 " vim-scripts.org repos
@@ -32,7 +33,7 @@ Bundle 'ack.vim'
 Bundle 'javabrowser'
 "Bundle 'Vim-JDE'
 Bundle 'auto-pairs'
-Bundle 'SuperTab-continued.'
+Bundle 'SuperTab-continued'
 "Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 "Bundle 'vim-latex-suite'
 "Bundle 'LaTex-Box'
@@ -69,6 +70,9 @@ noremap <silent> <Space> :noh<Bar>:echo<CR>
 imap <C-space> <Plug>IMAP_JumpForward
 nmap <C-space> <Plug>IMAP_JumpForward
 vmap <C-space> <Plug>IMAP_JumpForward
+noremap ç "+y
+noremap √ "+p
+
 
 let mapleader=","
 
