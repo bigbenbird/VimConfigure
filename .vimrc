@@ -1,6 +1,9 @@
 "vundle begin
 set nocompatible " be iMproved
 filetype off  "required!
+set ts=4
+set expandtab
+set clipboard=unnamedplus
 
 if has('win32') || has('win64')
 	set rtp^=~/.vim/
@@ -16,9 +19,9 @@ endif
 Bundle 'gmarik/vundle'
 Bundle 'AutoComplPop'
 
-
 " vim-scripts.org repos
 Bundle 'OmniCppComplete'
+"Bundle 'christoomey/vim-system-copy'
 Bundle 'The-NERD-tree'
 Bundle 'taglist.vim'
 Bundle 'Tagbar'
@@ -30,6 +33,7 @@ Bundle 'terryma/vim-multiple-cursors'
 Bundle 'grep.vim'
 Bundle 'ack.vim'
 Bundle 'javabrowser'
+"Bundle 'EasyClip'
 "Bundle 'Vim-JDE'
 Bundle 'auto-pairs'
 Bundle 'SuperTab-continued.'
@@ -91,9 +95,12 @@ if has("gui_running") || (&term == "win32") || (&term == "pcterm")
 elseif (&term == "xterm")
 	noremap <Esc>[1;5D :bp<CR> 
 	noremap <Esc>[1;5C :bn<CR> 
+elseif (&term == "xterm-256color")
+	noremap <C-Left> :bn<CR>
+	noremap <C-Right> :bp<CR>
 else
 	noremap <Esc>[D :bp<CR>
-	noremap <Esc>[C :bn<CR>
+    noremap <Esc>[C :bn<CR>
 endif
 " Quick close all window
 map <leader>qq :qall<CR>
