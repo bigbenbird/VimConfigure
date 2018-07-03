@@ -14,6 +14,11 @@ else
 	set rtp+=~/.vim/bundle/vundle/
 	call vundle#rc()
 endif
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 " let Vundle manage plugins
 " required! 
 Bundle 'gmarik/vundle'
