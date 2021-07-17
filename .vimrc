@@ -2,8 +2,10 @@
 set nocompatible " be iMproved
 filetype off  "required!
 set ts=4
+set pyxversion=3
 set expandtab
-set clipboard=unnamedplus
+"set clipboard=unnamedplus
+set fileencodings=utf-8,ucs-bom,gb18030,gbk,gb2312,cp936
 
 if has('win32') || has('win64')
 	set rtp^=~/.vim/
@@ -11,16 +13,26 @@ if has('win32') || has('win64')
 	call vundle#rc('$HOME/.vim/vimfiles/bundle')
 else
 	" Usual quickstart instructions
-	set rtp+=~/.vim/bundle/vundle/
-	call vundle#rc()
+	set rtp+=~/.vim/bundle/Vundle.vim
+	call vundle#begin()
 endif
 " let Vundle manage plugins
 " required! 
-Bundle 'gmarik/vundle'
-Bundle 'AutoComplPop'
+Plugin 'VundleVim/Vundle.vim'
+"Bundle 'AutoComplPop'
+"Bundle 'othree/vim-autocomplpop'
+Bundle 'L9'
 
 " vim-scripts.org repos
 Bundle 'OmniCppComplete'
+if has('nvim')
+  Bundle 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Bundle 'Shougo/deoplete.nvim'
+  Bundle 'roxma/nvim-yarp'
+  Bundle 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
 "Bundle 'christoomey/vim-system-copy'
 Bundle 'The-NERD-tree'
 Bundle 'taglist.vim'
@@ -36,12 +48,86 @@ Bundle 'javabrowser'
 "Bundle 'EasyClip'
 "Bundle 'Vim-JDE'
 Bundle 'auto-pairs'
-Bundle 'SuperTab-continued.'
+Bundle 'SuperTab-continued'
 "Bundle 'git://git.code.sf.net/p/vim-latex/vim-latex'
 "Bundle 'vim-latex-suite'
 "Bundle 'LaTex-Box'
 "Bundle 'auctex.vim'
 Bundle "LaTeX-Suite-aka-Vim-LaTeX"
+call vundle#end()
+
+"Note: This option must be set in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 1
+" Use neocomplete.
+let g:neocomplete#enable_at_startup = 1
+" Use smartcase.
+let g:neocomplete#enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplete#sources#syntax#min_keyword_length = 3
+
+" Define dictionary.
+let g:neocomplete#sources#dictionary#dictionaries = {
+    \ 'default' : '',
+    \ 'vimshell' : $HOME.'/.vimshell_hist',
+    \ 'scheme' : $HOME.'/.gosh_completions'
+        \ }
+
+" Define keyword.
+if !exists('g:neocomplete#keyword_patterns')
+    let g:neocomplete#keyword_patterns = {}
+endif
+let g:neocomplete#keyword_patterns['default'] = '\h\w*'
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplete#undo_completion()
+inoremap <expr><C-l>     neocomplete#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+inoremap <expr><CR> pumvisible()? "\<C-y>" : "\<CR>"
+function! s:my_cr_function()
+  return (pumvisible() ? "\<C-y>" : "" ) . "\<CR>"
+  " For no inserting <CR> key.
+  "return pumvisible() ? "\<C-y>" : "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplete#smart_close_popup()."\<C-h>"
+set backspace=indent,eol,start
+inoremap <expr><BS> neocomplete#smart_close_popup()."\<C-h>"
+" Close popup by <Space>.
+"inoremap <expr><Space> pumvisible() ? "\<C-y>" : "\<Space>"
+
+" AutoComplPop like behavior.
+"let g:neocomplete#enable_auto_select = 1
+
+" Shell like behavior(not recommended).
+"set completeopt+=longest
+"let g:neocomplete#enable_auto_select = 1
+"let g:neocomplete#disable_auto_complete = 1
+"inoremap <expr><TAB>  pumvisible() ? "\<Down>" : "\<C-x>\<C-u>"
+
+" Enable omni completion.
+autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+
+" Enable heavy omni completion.
+if !exists('g:neocomplete#sources#omni#input_patterns')
+  let g:neocomplete#sources#omni#input_patterns = {}
+endif
+"let g:neocomplete#sources#omni#input_patterns.php = '[^. \t]->\h\w*\|\h\w*::'
+"let g:neocomplete#sources#omni#input_patterns.c = '[^.[:digit:] *\t]\%(\.\|->\)'
+"let g:neocomplete#sources#omni#input_patterns.cpp = '[^.[:digit:] *\t]\%(\.\|->\)\|\h\w*::'
+
+" For perlomni.vim setting.
+" https://github.com/c9s/perlomni.vim
+let g:neocomplete#sources#omni#input_patterns.perl = '\h\w*->\h\w*\|\h\w*::'
 
 "filetype plugin indent on     " required! 
 let NERDTreeDirArrows=0
